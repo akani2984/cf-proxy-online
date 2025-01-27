@@ -19,7 +19,7 @@ export default {
           <script>
               function search() {
                   document.cookie = document.getElementById("text").value;
-                  window.location.href = window.location.hostname
+                  location.replace('https://' + window.location.hostname)
               }
           </script>
       </body>
