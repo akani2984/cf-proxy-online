@@ -13,12 +13,12 @@ export default {
         
       </head>
       <body><div class="mdui-prose">
-          <mdui-text-field  id="text" label="Address"></mdui-text-field>
+          <mdui-text-field  id="text" label="Hostname"></mdui-text-field>
           <mdui-button onclick="search()">GO</mdui-button></div>
           <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
           <script>
               function search() {
-                  document.cookie = document.getElementById("text").value;
+                  document.cookie = 'hostname=' + document.getElementById("text").value;
                   location.replace('https://' + window.location.hostname)
               }
           </script>
@@ -27,10 +27,18 @@ export default {
         `
        return new Response(page, {headers: {'Content-Type': 'text/html; charset=utf-8'}})
       }
+       function getCookie(name) {
+        let match = request.headers.get("Cookie").match(new RegExp('(^| )' + name + '=([^;]+)'));
+        if (match) {
+            return match[2];
+        } else {
+            return null;
+        }
+      }
       let blockfix = { method: request.method,
                      headers: request.headers};
       let destinationurl = new URL(request.url)
-      destinationurl.hostname = request.headers.get("Cookie")
+      destinationurl.hostname = getCookie('hostname')
       let nrequest = new Request(destinationurl, blockfix);
       return fetch(nrequest);
     }
