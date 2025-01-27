@@ -37,7 +37,7 @@ export default {
       }
       let blockfix = { method: request.method,
                      headers: request.headers,
-                     body:  request.arrayBuffer()
+                     //body:  request.arrayBuffer()
                      };
       let destinationurl = new URL(request.url)
       destinationurl.hostname = getCookie('hostname')
