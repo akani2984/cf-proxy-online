@@ -41,7 +41,7 @@ export default {
                      };
       let destinationurl = new URL(request.url)
       destinationurl.hostname = getCookie('hostname')
-      let nrequest = new Request(destinationurl, blockfix);
+      let nrequest = new Request(destinationurl, request);
       return fetch(nrequest);
     }
 };
